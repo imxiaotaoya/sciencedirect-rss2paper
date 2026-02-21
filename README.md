@@ -112,7 +112,7 @@ python main.py "https://example.com/journal/rss" --no-api
 
 ```
 sdrss/
-├── .env.example      # 环境变量示例（复制为 .env 后填写）
+├── .env              # 环境变量
 ├── config.py         # 读取 .env 与配置项
 ├── rss_parser.py     # RSS 解析与 DOI/PII 提取
 ├── article_fetcher.py # API 与文章页拉取
