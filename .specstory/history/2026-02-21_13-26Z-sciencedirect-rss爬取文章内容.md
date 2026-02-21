@@ -1333,7 +1333,6 @@ I should give a clear, concise answer in Chinese: 是的，只要把 Anaconda �
 
 ---
 
-
 是的。**只要把 Anaconda 的 Python 加到系统环境变量 PATH 里，并且让它先于其它 Python 被找到，在普通 cmd 里输入 `python` 就会默认用 Anaconda 的 Python。**
 
 要点：
@@ -1387,7 +1386,6 @@ I'll give a short, actionable list in Chinese.
 
 ---
 
-
 你的 Python 在 `E:\Anaconda\python.exe`，可以按下面两种方式用。
 
 ---
@@ -1439,6 +1437,173 @@ python main.py "https://rss.sciencedirect.com/publication/science/00487333" -n 5
 **小结**：  
 - 只想跑 sdrss：用方式一，两条命令即可。  
 - 希望以后在 cmd 里直接打 `python`：用方式二加 PATH。
+
+---
+
+_**User**_
+
+我想上传到github存储项目
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+
+The user wants to upload the sdrss project to GitHub. I should help them with:
+1. Making sure .gitignore is proper (so .env, output, etc. are not committed)
+2. Initializing git if not already
+3. Giving clear steps: git init, add, commit, create repo on GitHub, add remote, push
+
+Let me check the current state of the project - .gitignore exists, and whether there's already a .git folder or not. The workspace path shown is a bit odd (file:///app/backend/server/D:%5Cdesktop%5Csdrss) but the user's project is at D:\desktop\sdrss. I'll use the workspace path for file operations - the reminder says "Workspace folders changed" to "d:\desktop\sdrss" (lowercase), so I'll use D:\desktop\sdrss for paths.
+
+I'll:
+1. Read .gitignore to confirm it has .env and output
+2. Provide step-by-step instructions for uploading to GitHub (init, add, commit, create repo on GitHub, remote add, push)
+3. Optionally add a brief "如何上传到 GitHub" section to README if that would help - the user asked "如何操作" so clear commands are more important. I'll give them the commands and optionally add a short section to README.
+</details></think>
+
+---
+
+
+正在确认项目的 `.gitignore` 是否完整，随后给出上传到 GitHub 的步骤。
+
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: D:\desktop\sdrss\.gitignore</summary>
+
+</details>
+</tool-use>
+
+---
+
+rg: : IO error for operation on : 系统找不到指定的路径。 (os error 3)
+
+---
+
+<think><details><summary>Thought Process</summary>
+
+.gitignore looks good - .env and output/ are ignored. The glob failed due to path - maybe the workspace path is different. I'll proceed with the instructions. I'll give the user clear steps and optionally add a section to README for "上传到 GitHub".
+</details></think>
+
+---
+
+
+`.gitignore` 已包含 `.env` 和 `output/`，敏感文件和输出不会被提交。正在把上传到 GitHub 的步骤写入 README：
+
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: D:\desktop\sdrss\README.md</summary>
+
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+
+I'll add a new section "上传到 GitHub" near the end of the README (before 常见问题 or after 项目结构). Let me read more of the README to find the right place.
+</details></think>
+
+---
+
+
+
+
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: D:\desktop\sdrss\README.md</summary>
+
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+
+I'll add a new section "上传到 GitHub" before "常见问题". This will give the user clear steps: 1) install git if needed, 2) init, 3) add, 4) commit, 5) create repo on GitHub, 6) add remote, 7) push. I'll also remind them not to commit .env.
+</details></think>
+
+---
+
+
+
+
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: D:\desktop\sdrss\README.md</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+
+Done. I've added the "上传到 GitHub" section. Let me give the user a short summary of the steps they need to do.
+</details></think>
+
+---
+
+
+已经在 README 里加好了「上传到 GitHub」的步骤，你可以按下面做：
+
+---
+
+**1. 在项目目录打开终端（cmd 或 PowerShell）**
+
+```bash
+cd D:\desktop\sdrss
+```
+
+**2. 初始化 Git 并做第一次提交**
+
+```bash
+git init
+git add .
+git status
+```
+
+确认列表里**没有** `.env` 和 `output/`（已被 `.gitignore` 忽略），然后：
+
+```bash
+git commit -m "Initial commit: SDRSS ScienceDirect RSS full-text fetcher"
+```
+
+**3. 在 GitHub 上建仓库**
+
+- 打开 [https://github.com/new](https://github.com/new)
+- 仓库名填 `sdrss`（或你喜欢的名字）
+- **不要**勾选 “Add a README” 等（本地已有代码）
+- 点 “Create repository”
+
+**4. 关联远程并推送**
+
+把 `你的用户名` 换成你的 GitHub 用户名：
+
+```bash
+git remote add origin https://github.com/你的用户名/sdrss.git
+git branch -M main
+git push -u origin main
+```
+
+如果提示登录，按提示用浏览器或 Personal Access Token 完成认证即可。
+
+---
+
+**注意**：`.env` 里有 API Key，已在 `.gitignore` 里，不会被提交。只要不用 `git add -f .env` 强制添加，就不会传到 GitHub。
+
+以上内容也已写在 [README.md](D:\desktop\sdrss\README.md) 的「上传到 GitHub」一节，之后可以随时翻文档操作。
 
 ---
 

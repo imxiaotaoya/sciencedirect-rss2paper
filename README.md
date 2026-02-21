@@ -130,6 +130,41 @@ sdrss/
     └── articles.json
 ```
 
+## 上传到 GitHub
+
+1. **安装 Git**（若未安装）：从 [git-scm.com](https://git-scm.com/) 下载安装，安装后新开一个终端。
+
+2. **在项目目录里初始化并提交**（不要提交 `.env`，已在 `.gitignore` 中忽略）：
+
+   ```bash
+   cd D:\desktop\sdrss
+   git init
+   git add .
+   git status   # 确认没有 .env、output 被加入
+   git commit -m "Initial commit: SDRSS ScienceDirect RSS full-text fetcher"
+   ```
+
+3. **在 GitHub 上新建仓库**  
+   打开 [github.com/new](https://github.com/new)，仓库名如 `sdrss`，**不要**勾选 “Add a README”等（本地已有代码）。创建后记下仓库地址，例如 `https://github.com/你的用户名/sdrss.git`。
+
+4. **关联远程并推送**（把下面的地址换成你的仓库地址）：
+
+   ```bash
+   git remote add origin https://github.com/你的用户名/sdrss.git
+   git branch -M main
+   git push -u origin main
+   ```
+
+   若使用 SSH：`git remote add origin git@github.com:你的用户名/sdrss.git`，再执行 `git push -u origin main`。
+
+之后修改代码可这样提交并推送：
+
+```bash
+git add .
+git commit -m "简短说明"
+git push
+```
+
 ## 常见问题
 
 **1. 只有标题没有正文？**  
